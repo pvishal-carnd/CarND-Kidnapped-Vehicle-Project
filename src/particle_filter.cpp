@@ -24,8 +24,16 @@ const double EPS = 0.0001;
 
 void ParticleFilter::init(double x, double y, double theta, double std[]) {
 
-    // Set the number of particles
-    num_particles = 100;
+
+    /* The number of particles
+     * We found we pass the tests even with 10 particles and the highest weight
+     * quickly converges to 1. In a more real case, there will have to be significantly
+     * more particles for lower localization errors
+     */
+    num_particles = 30;
+
+
+
     weights.resize(num_particles, 1.0);
     particles.resize(num_particles);
 
