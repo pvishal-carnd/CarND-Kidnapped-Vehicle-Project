@@ -144,6 +144,14 @@ int main()
             // std::cout << msg << std::endl;
             ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
 
+            // Optionally log the output for plotting
+            // for plotting the results of the filter
+#ifdef OUTPUT_LOG
+            std::ofstream logFile;
+            logFile.open("log.csv", std::ios::app);
+            logFile << best_particle.x << "," << best_particle.y << "," << best_particle.theta << "\n";
+            logFile.close();
+#endif //OUTPUT_LOG
             }
             } else {
                 std::string msg = "42[\"manual\",{}]";

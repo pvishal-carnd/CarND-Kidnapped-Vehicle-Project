@@ -89,7 +89,7 @@ void ParticleFilter::dataAssociation(std::vector<LandmarkObs> landmarks, std::ve
     // landmark it is closest to
 
     double minimum_value;
-    int    minimm_idx;
+    int    minimum_idx;
 
     for (int j = 0; j < observations.size(); j++){
         auto obs = observations[j];
@@ -102,11 +102,11 @@ void ParticleFilter::dataAssociation(std::vector<LandmarkObs> landmarks, std::ve
             auto distance = distsquare(obs.x,obs.y,lm.x,lm.y);
             if (distance < minimum_value) {
                 minimum_value = distance;
-                minimm_idx    = i;
+                minimum_idx    = i;
             }
         }
 
-        observations[j].id = minimm_idx;
+        observations[j].id = minimum_idx;
     }
 
 }
@@ -133,12 +133,12 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
         std::vector<LandmarkObs> observations_global;
         for (auto obs: observations){
 
-            LandmarkObs tobs;
-            tobs.x = p.x + obs.x * cos(p.theta) - obs.y * sin(p.theta);
-            tobs.y = p.y + obs.x * sin(p.theta) + obs.y * cos(p.theta);
-            tobs.id = obs.id;
+            LandmarkObs gobs;
+            gobs.x = p.x + obs.x * cos(p.theta) - obs.y * sin(p.theta);
+            gobs.y = p.y + obs.x * sin(p.theta) + obs.y * cos(p.theta);
+            gobs.id = obs.id;
 
-            observations_global.push_back(tobs);
+            observations_global.push_back(gobs);
         }
 
         // Loop through all landmarks in the map and choose the ones within the sensor range
